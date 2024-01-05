@@ -43,11 +43,11 @@ export class CDKPipelineApp extends awscdk.AwsCdkTypeScriptApp {
     });
 
     new SampleFile(this, './src/exampleStack/exampleStack.ts', {
-      sourcePath: path.join(__dirname, './src/templatefiles/exampleStack.template.ts'),
+      sourcePath: path.join(__dirname, '../projectAssets/templatefiles/exampleStack.ts.template'),
     });
 
     new SampleFile(this, './src/pipeline/pipeline.ts', {
-      sourcePath: path.join(__dirname, './src/templatefiles/pipeline.template.ts'),
+      sourcePath: path.join(__dirname, '../projectAssets/templatefiles/pipeline.ts.template'),
     });
   }
 }

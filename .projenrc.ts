@@ -29,4 +29,7 @@ const project = new cdk.JsiiProject({
     },
   },
 });
+
+project.addGitIgnore('!projectAssets/**');
+
 project.synth();
