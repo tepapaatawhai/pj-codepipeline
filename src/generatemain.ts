@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { SourceCode, SampleFile, Project } from 'projen';
+import { SourceCode, Project } from 'projen';
 
 
 /**
@@ -15,7 +15,7 @@ export interface MainProps {
 export class Main {
   public constructor(project: Project, filepath: string, props: MainProps) {
 
-    const sourceFile = new SourceCode(project, './build/main.ts');
+    const sourceFile = new SourceCode(project, filepath);
     sourceFile.line('import { App } from \'aws-cdk-lib\';');
     sourceFile.line('import * as environments from \'./pipeline/environments\';');
     sourceFile.line('import { Pipeline } from \'./pipeline/pipeline\';');
@@ -31,7 +31,7 @@ export class Main {
     sourceFile.line('');
     sourceFile.line('app.synth();');
 
-    new SampleFile(project, filepath, { sourcePath: './build/main.ts' });
+    // new SampleFile(project, filepath, { sourcePath: './build/main.ts' });
 
 
   }

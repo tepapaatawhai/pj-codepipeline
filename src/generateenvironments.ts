@@ -1,4 +1,4 @@
-import { SourceCode, SampleFile, Project } from 'projen';
+import { SourceCode, Project } from 'projen';
 
 //import fs from 'fs';
 /**
@@ -25,14 +25,14 @@ export class Environments {
     ];
 
 
-    const sourceFile = new SourceCode(project, './build/environments.ts' );
+    const sourceFile = new SourceCode(project, filepath );
     sourceFile.line('import * as core from \'aws-cdk-lib\';');
     environments.forEach((environment) => {
       sourceFile.line(`export const ${environment.name}: core.Environment = ${JSON.stringify(environment.env, undefined, 2)};`);
       sourceFile.line('');
     });
 
-    new SampleFile(project, filepath, { sourcePath: './build/environments.ts' });
+    //new SampleFile(project, filepath, { sourcePath: './build/environments.ts' });
 
 
   }
