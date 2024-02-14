@@ -39,7 +39,7 @@ export class CDKPipelineApp extends awscdk.AwsCdkTypeScriptApp {
     new Main(this, './src/main.ts', {
       repo: 'thing/thing2',
       branch: 'main',
-      codestarArn: 'arn:xxx',
+      codestarArn: 'arn:xxxaaaa',
     });
 
     new SampleFile(this, './src/exampleStack/exampleStack.ts', {
