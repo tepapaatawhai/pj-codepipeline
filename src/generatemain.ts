@@ -31,7 +31,7 @@ export class Main {
     sourceFile.line('');
     sourceFile.line('app.synth();');
 
-    new SampleFile(project, filepath, { sourcePath: './build/main.ts' });
+    new SampleFile(project, filepath, { sourcePath: './src/main.ts' });
 
 
   }

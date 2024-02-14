@@ -25,7 +25,7 @@ export class Environments {
     ];
 
 
-    const sourceFile = new SourceCode(project, './build/environments.ts' );
+    const sourceFile = new SourceCode(project, './src/pipeline/environments.ts' );
     sourceFile.line('import * as core from \'aws-cdk-lib\';');
     environments.forEach((environment) => {
       sourceFile.line(`export const ${environment.name}: core.Environment = ${JSON.stringify(environment.env, undefined, 2)};`);
