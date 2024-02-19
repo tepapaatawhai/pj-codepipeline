@@ -1,6 +1,6 @@
+import * as fs from 'fs';
 import { SourceCode, Project } from 'projen';
 
-//import fs from 'fs';
 /**
  * A TypeScript interface rendered from a jsii interface specification
  */
@@ -25,15 +25,14 @@ export class Environments {
     ];
 
 
-    const sourceFile = new SourceCode(project, filepath );
-    sourceFile.line('import * as core from \'aws-cdk-lib\';');
-    environments.forEach((environment) => {
-      sourceFile.line(`export const ${environment.name}: core.Environment = ${JSON.stringify(environment.env, undefined, 2)};`);
-      sourceFile.line('');
-    });
-
-    //new SampleFile(project, filepath, { sourcePath: './build/environments.ts' });
-
+    if (!(fs.existsSync(filepath))) {
+      const sourceFile = new SourceCode(project, filepath );
+      sourceFile.line('import * as core from \'aws-cdk-lib\';');
+      environments.forEach((environment) => {
+        sourceFile.line(`export const ${environment.name}: core.Environment = ${JSON.stringify(environment.env, undefined, 2)};`);
+        sourceFile.line('');
+      });
+    }
 
   }
 }
