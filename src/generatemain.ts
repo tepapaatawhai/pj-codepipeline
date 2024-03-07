@@ -17,7 +17,9 @@ export class Main {
   public constructor(project: Project, filepath: string, props: MainProps) {
 
     if (!(fs.existsSync(filepath))) {
-      const sourceFile = new SourceCode(project, filepath);
+      const sourceFile = new SourceCode(project, filepath, {
+        readonly: false,
+      });
       sourceFile.line('import { App } from \'aws-cdk-lib\';');
       sourceFile.line('import * as environments from \'./pipeline/environments\';');
       sourceFile.line('import { Pipeline } from \'./pipeline/pipeline\';');
