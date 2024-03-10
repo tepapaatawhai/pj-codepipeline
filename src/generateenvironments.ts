@@ -26,7 +26,9 @@ export class Environments {
 
 
     if (!(fs.existsSync(filepath))) {
-      const sourceFile = new SourceCode(project, filepath );
+      const sourceFile = new SourceCode(project, filepath, {
+        readonly: false,
+      });
       sourceFile.line('import * as core from \'aws-cdk-lib\';');
       environments.forEach((environment) => {
         sourceFile.line(`export const ${environment.name}: core.Environment = ${JSON.stringify(environment.env, undefined, 2)};`);

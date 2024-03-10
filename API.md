@@ -33,7 +33,7 @@ new CDKPipelineApp(options: CDKPipelineAppOptions)
 | <code><a href="#pj-codepipeline.CDKPipelineApp.toString">toString</a></code> | Returns a string representation of this construct. |
 | <code><a href="#pj-codepipeline.CDKPipelineApp.addExcludeFromCleanup">addExcludeFromCleanup</a></code> | Exclude the matching files from pre-synth cleanup. |
 | <code><a href="#pj-codepipeline.CDKPipelineApp.addGitIgnore">addGitIgnore</a></code> | Adds a .gitignore pattern. |
-| <code><a href="#pj-codepipeline.CDKPipelineApp.addPackageIgnore">addPackageIgnore</a></code> | Exclude these files from the bundled package. |
+| <code><a href="#pj-codepipeline.CDKPipelineApp.addPackageIgnore">addPackageIgnore</a></code> | Adds patterns to be ignored by npm. |
 | <code><a href="#pj-codepipeline.CDKPipelineApp.addTask">addTask</a></code> | Adds a new task to this project. |
 | <code><a href="#pj-codepipeline.CDKPipelineApp.addTip">addTip</a></code> | Prints a "tip" message during synthesis. |
 | <code><a href="#pj-codepipeline.CDKPipelineApp.annotateGenerated">annotateGenerated</a></code> | Marks the provided file(s) as being generated. |
@@ -113,14 +113,13 @@ The glob pattern to ignore.
 public addPackageIgnore(pattern: string): void
 ```
 
-Exclude these files from the bundled package.
-
-Implemented by project types based on the
-packaging mechanism. For example, `NodeProject` delegates this to `.npmignore`.
+Adds patterns to be ignored by npm.
 
 ###### `pattern`<sup>Required</sup> <a name="pattern" id="pj-codepipeline.CDKPipelineApp.addPackageIgnore.parameter.pattern"></a>
 
 - *Type:* string
+
+The pattern to ignore.
 
 ---
 
@@ -1653,6 +1652,7 @@ const cDKPipelineAppOptions: CDKPipelineAppOptions = { ... }
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.maxNodeVersion">maxNodeVersion</a></code> | <code>string</code> | Minimum node.js version to require via `engines` (inclusive). |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.minNodeVersion">minNodeVersion</a></code> | <code>string</code> | Minimum Node.js version to require via package.json `engines` (inclusive). |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.npmAccess">npmAccess</a></code> | <code>projen.javascript.NpmAccess</code> | Access level of the npm package. |
+| <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.npmProvenance">npmProvenance</a></code> | <code>boolean</code> | Should provenance statements be generated when the package is published. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.npmRegistry">npmRegistry</a></code> | <code>string</code> | The host name of the npm registry to publish to. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.npmRegistryUrl">npmRegistryUrl</a></code> | <code>string</code> | The base URL of the npm package registry. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.npmTokenSecret">npmTokenSecret</a></code> | <code>string</code> | GitHub secret which contains the NPM token to use when publishing packages. |
@@ -2520,6 +2520,27 @@ Access level of the npm package.
 
 ---
 
+##### `npmProvenance`<sup>Optional</sup> <a name="npmProvenance" id="pj-codepipeline.CDKPipelineAppOptions.property.npmProvenance"></a>
+
+```typescript
+public readonly npmProvenance: boolean;
+```
+
+- *Type:* boolean
+- *Default:* true for public packages, false otherwise
+
+Should provenance statements be generated when the package is published.
+
+A supported package manager is required to publish a package with npm provenance statements and
+you will need to use a supported CI/CD provider.
+
+Note that the projen `Release` and `Publisher` components are using `publib` to publish packages,
+which is using npm internally and supports provenance statements independently of the package manager used.
+
+> [https://docs.npmjs.com/generating-provenance-statements](https://docs.npmjs.com/generating-provenance-statements)
+
+---
+
 ##### ~~`npmRegistry`~~<sup>Optional</sup> <a name="npmRegistry" id="pj-codepipeline.CDKPipelineAppOptions.property.npmRegistry"></a>
 
 - *Deprecated:* use `npmRegistryUrl` instead
@@ -2972,7 +2993,7 @@ public readonly releaseWorkflowName: string;
 ```
 
 - *Type:* string
-- *Default:* "Release"
+- *Default:* "release"
 
 The name of the default release workflow.
 

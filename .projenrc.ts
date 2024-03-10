@@ -11,13 +11,13 @@ const project = new cdk.JsiiProject({
   license: 'Apache-2.0',
   devDeps: [
     'constructs@^10.3.0',
-    'projen@0.78.8',
+    'projen@0.80.9',
   ],
   deps: [
-    'projen',
+    'projen@0.80.9',
   ],
   peerDeps: [
-    'projen',
+    'projen@0.80.9',
     'constructs',
   ],
   keywords: [

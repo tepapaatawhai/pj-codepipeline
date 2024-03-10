@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@types/jest": "^27",
-    "@types/node": "^16",
+    "@types/node": "^16 <= 16.18.78",
     "@typescript-eslint/eslint-plugin": "^6",
     "@typescript-eslint/parser": "^6",
     "constructs": "^10.0.0",
@@ -57,10 +57,10 @@
   },
   "peerDependencies": {
     "constructs": "^10.3.0",
-    "projen": "^0.78.8"
+    "projen": "0.80.9"
   },
   "dependencies": {
-    "projen": "^0.78.8"
+    "projen": "0.80.9"
   },
   "resolutions": {
     "@types/babel__traverse": "7.18.2",
