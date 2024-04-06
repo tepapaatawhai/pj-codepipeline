@@ -2,6 +2,7 @@ import { cdk } from 'projen';
 const project = new cdk.JsiiProject({
   author: 'MrpAcketheAd',
   authorAddress: 'andrew.frazer@raindancers.cloud',
+  npmProvenance: false,
   authorOrganization: true,
   defaultReleaseBranch: 'main',
   name: 'pj-codepipeline',
