@@ -32,7 +32,11 @@ export class CDKPipelineApp extends awscdk.AwsCdkTypeScriptApp {
         mergify: options.closedSource === undefined ? false : !options.closedSource,
       },
       ...options,
+
     });
+
+
+    this.npmrc.addRegistry('https://npm.pkg.github.com', '@tepapaatawhai');
 
     new Environments(this, './src/pipeline/environments.ts');
 
