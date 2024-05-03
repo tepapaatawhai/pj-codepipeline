@@ -32,6 +32,10 @@ export class CDKPipelineApp extends awscdk.AwsCdkTypeScriptApp {
         mergify: options.closedSource === undefined ? false : !options.closedSource,
       },
       ...options,
+      deps: [
+        '@tepapaatawhai/depcon-cdk',
+        'raindancers-cdk',
+      ],
 
     });
 
