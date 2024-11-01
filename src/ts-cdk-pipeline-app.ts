@@ -64,9 +64,11 @@ export class CDKPipelineApp extends awscdk.AwsCdkTypeScriptApp {
       // Overide the Workflow permissions...
       JsonPatch.add('/jobs/build/permissions/packages', 'read'),
       JsonPatch.add('/jobs/build/permissions/id-token', 'write'),
-      JsonPatch.add('/jobs/build/steps/1/env/NODE_AUTH_TOKEN', '${{ secrets.GITHUB_TOKEN }}'),
       JsonPatch.add('/jobs/build/steps/0', configureNode),
     );
+
+    const build = this.github?.tryFindWorkflow('build');
+    build?.file?.addOverride('jobs.build.steps.1.env.NODE_AUTH_TOKEN', '${{ secrets.GITHUB_TOKEN }}');
 
     this.npmrc.addRegistry('https://npm.pkg.github.com', '@tepapaatawhai');
 

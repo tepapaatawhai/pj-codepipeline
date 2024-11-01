@@ -35,6 +35,8 @@ export class Pipeline extends cdk.Stack {
         { connectionArn: props.codestarArn },
        ),
       commands: [
+        'TOKEN=`aws secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:ap-southeast-2:957231369717:secret:npm.pkg.github.com_token-CffBec --region ap-southeast-2 | jq -r ".SecretString"`',
+        'npm set "//npm.pkg.github.com/:_authToken=$TOKEN"',
         'yarn install',
         'yarn build',
         'npx cdk synth',
