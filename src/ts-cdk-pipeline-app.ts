@@ -2,7 +2,9 @@ import * as path from 'path';
 import {
   awscdk,
   SampleFile,
+  JsonPatch,
 } from 'projen';
+import { UpgradeDependenciesSchedule } from 'projen/lib/javascript';
 import { Environments } from './generateenvironments';
 import { Main } from './generatemain';
 
@@ -36,9 +38,35 @@ export class CDKPipelineApp extends awscdk.AwsCdkTypeScriptApp {
         '@tepapaatawhai/depcon-cdk',
         'raindancers-cdk',
       ],
+      depsUpgradeOptions: {
+        workflowOptions: {
+          labels: ['auto-approve', 'auto-merge'],
+          schedule: UpgradeDependenciesSchedule.WEEKLY,
+        },
+
+      },
 
     });
 
+    // configure to use private package from Github
+    const configureNode = {
+      name: 'Use Node.js',
+      uses: 'actions/setup-node@v4',
+      with: {
+        'always-auth': true,
+        'node-version': '20.x',
+        'registry-url': 'https://npm.pkg.github.com',
+        'scope': '@tepapaatawhai',
+      },
+    };
+
+    this.github?.tryFindWorkflow('build')?.file?.patch(
+      // Overide the Workflow permissions...
+      JsonPatch.add('/jobs/build/permissions/packages', 'read'),
+      JsonPatch.add('/jobs/build/permissions/id-token', 'write'),
+      JsonPatch.add('/jobs/build/steps/1/env/NODE_AUTH_TOKEN', '${{ secrets.GITHUB_TOKEN }}'),
+      JsonPatch.add('/jobs/build/steps/0', configureNode),
+    );
 
     this.npmrc.addRegistry('https://npm.pkg.github.com', '@tepapaatawhai');
 

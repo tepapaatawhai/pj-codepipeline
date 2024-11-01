@@ -75,7 +75,7 @@ Returns a string representation of this construct.
 ##### `addExcludeFromCleanup` <a name="addExcludeFromCleanup" id="pj-codepipeline.CDKPipelineApp.addExcludeFromCleanup"></a>
 
 ```typescript
-public addExcludeFromCleanup(globs: string): void
+public addExcludeFromCleanup(globs: ...string[]): void
 ```
 
 Exclude the matching files from pre-synth cleanup.
@@ -85,7 +85,7 @@ source files include the projen marker and we don't want them to be erased durin
 
 ###### `globs`<sup>Required</sup> <a name="globs" id="pj-codepipeline.CDKPipelineApp.addExcludeFromCleanup.parameter.globs"></a>
 
-- *Type:* string
+- *Type:* ...string[]
 
 The glob patterns to match.
 
@@ -341,7 +341,7 @@ public addBins(bins: {[ key: string ]: string}): void
 ##### `addBundledDeps` <a name="addBundledDeps" id="pj-codepipeline.CDKPipelineApp.addBundledDeps"></a>
 
 ```typescript
-public addBundledDeps(deps: string): void
+public addBundledDeps(deps: ...string[]): void
 ```
 
 Defines bundled dependencies.
@@ -351,7 +351,7 @@ Bundled dependencies will be added as normal dependencies as well as to the
 
 ###### `deps`<sup>Required</sup> <a name="deps" id="pj-codepipeline.CDKPipelineApp.addBundledDeps.parameter.deps"></a>
 
-- *Type:* string
+- *Type:* ...string[]
 
 Names modules to install.
 
@@ -366,28 +366,28 @@ add/upgrade`. If you wish to specify a version range use this syntax:
 ##### ~~`addCompileCommand`~~ <a name="addCompileCommand" id="pj-codepipeline.CDKPipelineApp.addCompileCommand"></a>
 
 ```typescript
-public addCompileCommand(commands: string): void
+public addCompileCommand(commands: ...string[]): void
 ```
 
 DEPRECATED.
 
 ###### `commands`<sup>Required</sup> <a name="commands" id="pj-codepipeline.CDKPipelineApp.addCompileCommand.parameter.commands"></a>
 
-- *Type:* string
+- *Type:* ...string[]
 
 ---
 
 ##### `addDeps` <a name="addDeps" id="pj-codepipeline.CDKPipelineApp.addDeps"></a>
 
 ```typescript
-public addDeps(deps: string): void
+public addDeps(deps: ...string[]): void
 ```
 
 Defines normal dependencies.
 
 ###### `deps`<sup>Required</sup> <a name="deps" id="pj-codepipeline.CDKPipelineApp.addDeps.parameter.deps"></a>
 
-- *Type:* string
+- *Type:* ...string[]
 
 Names modules to install.
 
@@ -402,14 +402,14 @@ add/upgrade`. If you wish to specify a version range use this syntax:
 ##### `addDevDeps` <a name="addDevDeps" id="pj-codepipeline.CDKPipelineApp.addDevDeps"></a>
 
 ```typescript
-public addDevDeps(deps: string): void
+public addDevDeps(deps: ...string[]): void
 ```
 
 Defines development/test dependencies.
 
 ###### `deps`<sup>Required</sup> <a name="deps" id="pj-codepipeline.CDKPipelineApp.addDevDeps.parameter.deps"></a>
 
-- *Type:* string
+- *Type:* ...string[]
 
 Names modules to install.
 
@@ -440,14 +440,14 @@ The fields to set.
 ##### `addKeywords` <a name="addKeywords" id="pj-codepipeline.CDKPipelineApp.addKeywords"></a>
 
 ```typescript
-public addKeywords(keywords: string): void
+public addKeywords(keywords: ...string[]): void
 ```
 
 Adds keywords to package.json (deduplicated).
 
 ###### `keywords`<sup>Required</sup> <a name="keywords" id="pj-codepipeline.CDKPipelineApp.addKeywords.parameter.keywords"></a>
 
-- *Type:* string
+- *Type:* ...string[]
 
 The keywords to add.
 
@@ -456,7 +456,7 @@ The keywords to add.
 ##### `addPeerDeps` <a name="addPeerDeps" id="pj-codepipeline.CDKPipelineApp.addPeerDeps"></a>
 
 ```typescript
-public addPeerDeps(deps: string): void
+public addPeerDeps(deps: ...string[]): void
 ```
 
 Defines peer dependencies.
@@ -467,7 +467,7 @@ your code against the minimum version required from your consumers.
 
 ###### `deps`<sup>Required</sup> <a name="deps" id="pj-codepipeline.CDKPipelineApp.addPeerDeps.parameter.deps"></a>
 
-- *Type:* string
+- *Type:* ...string[]
 
 Names modules to install.
 
@@ -498,14 +498,14 @@ The scripts to set.
 ##### ~~`addTestCommand`~~ <a name="addTestCommand" id="pj-codepipeline.CDKPipelineApp.addTestCommand"></a>
 
 ```typescript
-public addTestCommand(commands: string): void
+public addTestCommand(commands: ...string[]): void
 ```
 
 DEPRECATED.
 
 ###### `commands`<sup>Required</sup> <a name="commands" id="pj-codepipeline.CDKPipelineApp.addTestCommand.parameter.commands"></a>
 
-- *Type:* string
+- *Type:* ...string[]
 
 ---
 
@@ -584,14 +584,14 @@ The command to execute.
 ##### `addCdkDependency` <a name="addCdkDependency" id="pj-codepipeline.CDKPipelineApp.addCdkDependency"></a>
 
 ```typescript
-public addCdkDependency(modules: string): void
+public addCdkDependency(modules: ...string[]): void
 ```
 
 Adds an AWS CDK module dependencies.
 
 ###### `modules`<sup>Required</sup> <a name="modules" id="pj-codepipeline.CDKPipelineApp.addCdkDependency.parameter.modules"></a>
 
-- *Type:* string
+- *Type:* ...string[]
 
 The list of modules to depend on.
 
@@ -722,8 +722,8 @@ When given a project, this it the project itself.
 | <code><a href="#pj-codepipeline.CDKPipelineApp.property.buildWorkflow">buildWorkflow</a></code> | <code>projen.build.BuildWorkflow</code> | The PR build GitHub workflow. |
 | <code><a href="#pj-codepipeline.CDKPipelineApp.property.buildWorkflowJobId">buildWorkflowJobId</a></code> | <code>string</code> | The job ID of the build workflow. |
 | <code><a href="#pj-codepipeline.CDKPipelineApp.property.jest">jest</a></code> | <code>projen.javascript.Jest</code> | The Jest configuration (if enabled). |
-| <code><a href="#pj-codepipeline.CDKPipelineApp.property.maxNodeVersion">maxNodeVersion</a></code> | <code>string</code> | Maximum node version required by this package. |
-| <code><a href="#pj-codepipeline.CDKPipelineApp.property.minNodeVersion">minNodeVersion</a></code> | <code>string</code> | Minimum node.js version required by this package. |
+| <code><a href="#pj-codepipeline.CDKPipelineApp.property.maxNodeVersion">maxNodeVersion</a></code> | <code>string</code> | Maximum node version supported by this package. |
+| <code><a href="#pj-codepipeline.CDKPipelineApp.property.minNodeVersion">minNodeVersion</a></code> | <code>string</code> | The minimum node version required by this package to function. |
 | <code><a href="#pj-codepipeline.CDKPipelineApp.property.npmignore">npmignore</a></code> | <code>projen.IgnoreFile</code> | The .npmignore file. |
 | <code><a href="#pj-codepipeline.CDKPipelineApp.property.prettier">prettier</a></code> | <code>projen.javascript.Prettier</code> | *No description.* |
 | <code><a href="#pj-codepipeline.CDKPipelineApp.property.publisher">publisher</a></code> | <code>projen.release.Publisher</code> | Package publisher. |
@@ -1304,7 +1304,9 @@ public readonly maxNodeVersion: string;
 
 - *Type:* string
 
-Maximum node version required by this package.
+Maximum node version supported by this package.
+
+The value indicates the package is incompatible with newer versions.
 
 ---
 
@@ -1316,7 +1318,9 @@ public readonly minNodeVersion: string;
 
 - *Type:* string
 
-Minimum node.js version required by this package.
+The minimum node version required by this package to function.
+
+This value indicates the package is incompatible with older versions.
 
 ---
 
@@ -1649,8 +1653,8 @@ const cDKPipelineAppOptions: CDKPipelineAppOptions = { ... }
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.keywords">keywords</a></code> | <code>string[]</code> | Keywords to include in `package.json`. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.license">license</a></code> | <code>string</code> | License's SPDX identifier. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.licensed">licensed</a></code> | <code>boolean</code> | Indicates if a license should be added. |
-| <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.maxNodeVersion">maxNodeVersion</a></code> | <code>string</code> | Minimum node.js version to require via `engines` (inclusive). |
-| <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.minNodeVersion">minNodeVersion</a></code> | <code>string</code> | Minimum Node.js version to require via package.json `engines` (inclusive). |
+| <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.maxNodeVersion">maxNodeVersion</a></code> | <code>string</code> | The maximum node version supported by this package. Most projects should not use this option. |
+| <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.minNodeVersion">minNodeVersion</a></code> | <code>string</code> | The minimum node version required by this package to function. Most projects should not use this option. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.npmAccess">npmAccess</a></code> | <code>projen.javascript.NpmAccess</code> | Access level of the npm package. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.npmProvenance">npmProvenance</a></code> | <code>boolean</code> | Should provenance statements be generated when the package is published. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.npmRegistry">npmRegistry</a></code> | <code>string</code> | The host name of the npm registry to publish to. |
@@ -1685,7 +1689,7 @@ const cDKPipelineAppOptions: CDKPipelineAppOptions = { ... }
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.releaseTrigger">releaseTrigger</a></code> | <code>projen.release.ReleaseTrigger</code> | The release trigger to use. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.releaseWorkflowName">releaseWorkflowName</a></code> | <code>string</code> | The name of the default release workflow. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.releaseWorkflowSetupSteps">releaseWorkflowSetupSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | A set of workflow steps to execute in order to setup the workflow container. |
-| <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.versionrcOptions">versionrcOptions</a></code> | <code>{[ key: string ]: any}</code> | Custom configuration used when creating changelog with standard-version package. |
+| <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.versionrcOptions">versionrcOptions</a></code> | <code>{[ key: string ]: any}</code> | Custom configuration used when creating changelog with commit-and-tag-version package. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.workflowContainerImage">workflowContainerImage</a></code> | <code>string</code> | Container image to use for GitHub workflows. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.workflowRunsOn">workflowRunsOn</a></code> | <code>string[]</code> | Github Runner selection labels. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.workflowRunsOnGroup">workflowRunsOnGroup</a></code> | <code>projen.GroupRunnerOptions</code> | Github Runner Group selection options. |
@@ -1693,10 +1697,11 @@ const cDKPipelineAppOptions: CDKPipelineAppOptions = { ... }
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.artifactsDirectory">artifactsDirectory</a></code> | <code>string</code> | A directory which will contain build artifacts. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.autoApproveUpgrades">autoApproveUpgrades</a></code> | <code>boolean</code> | Automatically approve deps upgrade PRs, allowing them to be merged by mergify (if configued). |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.buildWorkflow">buildWorkflow</a></code> | <code>boolean</code> | Define a GitHub workflow for building PRs. |
+| <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.buildWorkflowOptions">buildWorkflowOptions</a></code> | <code>projen.javascript.BuildWorkflowOptions</code> | Options for PR build workflow. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.buildWorkflowTriggers">buildWorkflowTriggers</a></code> | <code>projen.github.workflows.Triggers</code> | Build workflow triggers. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.bundlerOptions">bundlerOptions</a></code> | <code>projen.javascript.BundlerOptions</code> | Options for `Bundler`. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.checkLicenses">checkLicenses</a></code> | <code>projen.javascript.LicenseCheckerOptions</code> | Configure which licenses should be deemed acceptable for use by dependencies. |
-| <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.codeCov">codeCov</a></code> | <code>boolean</code> | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v3 A secret is required for private repos. Configured with `@codeCovTokenSecret`. |
+| <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.codeCov">codeCov</a></code> | <code>boolean</code> | Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v4 A secret is required for private repos. Configured with `@codeCovTokenSecret`. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.codeCovTokenSecret">codeCovTokenSecret</a></code> | <code>string</code> | Define the secret name for a specified https://codecov.io/ token A secret is required to send coverage for private repositories. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.copyrightOwner">copyrightOwner</a></code> | <code>string</code> | License copyright owner. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.copyrightPeriod">copyrightPeriod</a></code> | <code>string</code> | The copyright years to put in the LICENSE file. |
@@ -1725,7 +1730,7 @@ const cDKPipelineAppOptions: CDKPipelineAppOptions = { ... }
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.releaseWorkflow">releaseWorkflow</a></code> | <code>boolean</code> | DEPRECATED: renamed to `release`. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.workflowBootstrapSteps">workflowBootstrapSteps</a></code> | <code>projen.github.workflows.JobStep[]</code> | Workflow steps to use in order to bootstrap this repo. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.workflowGitIdentity">workflowGitIdentity</a></code> | <code>projen.github.GitIdentity</code> | The git identity to use in workflows. |
-| <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.workflowNodeVersion">workflowNodeVersion</a></code> | <code>string</code> | The node version to use in GitHub workflows. |
+| <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.workflowNodeVersion">workflowNodeVersion</a></code> | <code>string</code> | The node version used in GitHub Actions workflows. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.workflowPackageCache">workflowPackageCache</a></code> | <code>boolean</code> | Enable Node.js package cache in GitHub workflows. |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.disableTsconfig">disableTsconfig</a></code> | <code>boolean</code> | Do not generate a `tsconfig.json` file (used by jsii projects since tsconfig.json is generated by the jsii compiler). |
 | <code><a href="#pj-codepipeline.CDKPipelineAppOptions.property.disableTsconfigDev">disableTsconfigDev</a></code> | <code>boolean</code> | Do not generate a `tsconfig.dev.json` file. |
@@ -2488,9 +2493,15 @@ public readonly maxNodeVersion: string;
 ```
 
 - *Type:* string
-- *Default:* no max
+- *Default:* no maximum version is enforced
 
-Minimum node.js version to require via `engines` (inclusive).
+The maximum node version supported by this package. Most projects should not use this option.
+
+The value indicates that the package is incompatible with any newer versions of node.
+This requirement is enforced via the engines field.
+
+You will normally not need to set this option.
+Consider this option only if your package is known to not function with newer versions of node.
 
 ---
 
@@ -2501,9 +2512,19 @@ public readonly minNodeVersion: string;
 ```
 
 - *Type:* string
-- *Default:* no "engines" specified
+- *Default:* no minimum version is enforced
 
-Minimum Node.js version to require via package.json `engines` (inclusive).
+The minimum node version required by this package to function. Most projects should not use this option.
+
+The value indicates that the package is incompatible with any older versions of node.
+This requirement is enforced via the engines field.
+
+You will normally not need to set this option, even if your package is incompatible with EOL versions of node.
+Consider this option only if your package depends on a specific feature, that is not available in other LTS versions.
+Setting this option has very high impact on the consumers of your package,
+as package managers will actively prevent usage with node versions you have marked as incompatible.
+
+To change the node version of your CI/CD workflows, use `workflowNodeVersion`.
 
 ---
 
@@ -3020,7 +3041,7 @@ public readonly versionrcOptions: {[ key: string ]: any};
 - *Type:* {[ key: string ]: any}
 - *Default:* standard configuration applicable for GitHub repositories
 
-Custom configuration used when creating changelog with standard-version package.
+Custom configuration used when creating changelog with commit-and-tag-version package.
 
 Given values either append to default configuration or overwrite values in it.
 
@@ -3118,7 +3139,21 @@ Define a GitHub workflow for building PRs.
 
 ---
 
-##### `buildWorkflowTriggers`<sup>Optional</sup> <a name="buildWorkflowTriggers" id="pj-codepipeline.CDKPipelineAppOptions.property.buildWorkflowTriggers"></a>
+##### `buildWorkflowOptions`<sup>Optional</sup> <a name="buildWorkflowOptions" id="pj-codepipeline.CDKPipelineAppOptions.property.buildWorkflowOptions"></a>
+
+```typescript
+public readonly buildWorkflowOptions: BuildWorkflowOptions;
+```
+
+- *Type:* projen.javascript.BuildWorkflowOptions
+
+Options for PR build workflow.
+
+---
+
+##### ~~`buildWorkflowTriggers`~~<sup>Optional</sup> <a name="buildWorkflowTriggers" id="pj-codepipeline.CDKPipelineAppOptions.property.buildWorkflowTriggers"></a>
+
+- *Deprecated:* - Use `buildWorkflowOptions.workflowTriggers`
 
 ```typescript
 public readonly buildWorkflowTriggers: Triggers;
@@ -3167,7 +3202,7 @@ public readonly codeCov: boolean;
 - *Type:* boolean
 - *Default:* false
 
-Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v3 A secret is required for private repos. Configured with `@codeCovTokenSecret`.
+Define a GitHub workflow step for sending code coverage metrics to https://codecov.io/ Uses codecov/codecov-action@v4 A secret is required for private repos. Configured with `@codeCovTokenSecret`.
 
 ---
 
@@ -3304,7 +3339,9 @@ Jest options.
 
 ---
 
-##### `mutableBuild`<sup>Optional</sup> <a name="mutableBuild" id="pj-codepipeline.CDKPipelineAppOptions.property.mutableBuild"></a>
+##### ~~`mutableBuild`~~<sup>Optional</sup> <a name="mutableBuild" id="pj-codepipeline.CDKPipelineAppOptions.property.mutableBuild"></a>
+
+- *Deprecated:* - Use `buildWorkflowOptions.mutableBuild`
 
 ```typescript
 public readonly mutableBuild: boolean;
@@ -3408,7 +3445,7 @@ public readonly projenDevDependency: boolean;
 ```
 
 - *Type:* boolean
-- *Default:* true
+- *Default:* true if not a subproject
 
 Indicates of "projen" should be installed as a devDependency.
 
@@ -3553,9 +3590,11 @@ public readonly workflowNodeVersion: string;
 ```
 
 - *Type:* string
-- *Default:* same as `minNodeVersion`
+- *Default:* `minNodeVersion` if set, otherwise `lts/*`.
 
-The node version to use in GitHub workflows.
+The node version used in GitHub Actions workflows.
+
+Always use this option if your GitHub Actions workflows require a specific to run.
 
 ---
 
