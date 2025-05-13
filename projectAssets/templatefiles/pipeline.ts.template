@@ -25,6 +25,33 @@ export class Pipeline extends cdk.Stack {
       dockerEnabledForSelfMutation: true,
       dockerEnabledForSynth: true, // we need this to bundle the lambdas with requirements
 
+      / Add permissions for the CodeBuild role to access the secret and KMS key
+      synthCodeBuildDefaults: {
+        rolePolicy: [
+          // Permission to access the secret in the other account
+          new cdk.aws_iam.PolicyStatement({
+            effect: cdk.aws_iam.Effect.ALLOW,
+            actions: ['secretsmanager:GetSecretValue', 'secretsmanager:DescribeSecret'],
+            resources: ['arn:aws:secretsmanager:ap-southeast-2:957231369717:secret:npm.pkg.github.com_token-CffBec'],
+          }),
+          // Permission to use the KMS key that encrypts the secret
+          new cdk.aws_iam.PolicyStatement({
+            effect: cdk.aws_iam.Effect.ALLOW,
+            actions: [
+              'kms:Decrypt',
+              'kms:DescribeKey',
+            ],
+            // Ideally, you should specify the exact KMS key ARN if you know it
+            resources: ['*'],
+            conditions: {
+              StringEquals: {
+                'aws:ResourceAccount': '957231369717',
+              },
+            },
+          }),
+        ],
+      },
+
       synth: new pipelines.ShellStep('Synth', {
 
        // Use a connection created using the AWS console to authenticate to GitHub
