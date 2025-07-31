@@ -25,7 +25,7 @@ export class Pipeline extends cdk.Stack {
       dockerEnabledForSelfMutation: true,
       dockerEnabledForSynth: true, // we need this to bundle the lambdas with requirements
 
-      / Add permissions for the CodeBuild role to access the secret and KMS key
+      // Add permissions for the CodeBuild role to access the secret and KMS key
       synthCodeBuildDefaults: {
         rolePolicy: [
           // Permission to access the secret in the other account
