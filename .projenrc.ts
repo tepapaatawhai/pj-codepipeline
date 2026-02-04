@@ -10,16 +10,15 @@ const project = new cdk.JsiiProject({
   repositoryUrl: 'https://github.com/tepapaatawhai/ts-cdk-pipeline-apps.git',
   licensed: true,
   license: 'Apache-2.0',
+  jsiiVersion: '>=5.9.0',
   devDeps: [
-    'constructs',
-    'projen',
-  ],
-  deps: [
-    'projen',
+    'constructs@^10.3.0',
+    'projen@^0.99.9',
+    'ts-jest@^29',
   ],
   peerDeps: [
-    'projen',
-    'constructs',
+    'projen@^0.99.9',
+    'constructs@^10.3.0',
   ],
   keywords: [
     'aws',
