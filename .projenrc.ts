@@ -7,7 +7,7 @@ const project = new cdk.JsiiProject({
   defaultReleaseBranch: 'main',
   name: 'pj-codepipeline',
   projenrcTs: true,
-  repositoryUrl: 'https://github.com/tepapaatawhai/ts-cdk-pipeline-apps.git',
+  repositoryUrl: 'https://github.com/tepapaatawhai/pj-codepipeline.git',
   licensed: true,
   license: 'Apache-2.0',
   devDeps: [
