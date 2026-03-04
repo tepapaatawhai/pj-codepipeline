@@ -2,7 +2,7 @@
   "name": "pj-codepipeline",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tepapaatawhai/ts-cdk-pipeline-apps.git"
+    "url": "https://github.com/tepapaatawhai/pj-codepipeline.git"
   },
   "scripts": {
     "build": "npx projen build",
