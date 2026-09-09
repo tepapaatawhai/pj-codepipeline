@@ -36,6 +36,21 @@ const codeArtifactAuthSteps = [
 ];
 
 
+// The library dependencies every project built on this construct gets. They carry no
+// version: each repository pins its own, because consumers sit on a wide spread of
+// raindancers-cdk versions and one base construct cannot inject the right pin for all of
+// them. A repository that passes its own spec for either of these keeps it.
+const injectedDeps = [
+  '@tepapaatawhai/depcon-cdk',
+  '@tepapaatawhai/raindancers-cdk',
+];
+
+// 'name@1.2.3' -> 'name', '@scope/name@1.2.3' -> '@scope/name', 'name' -> 'name'.
+function dependencyName(spec: string): string {
+  const at = spec.lastIndexOf('@');
+  return at > 0 ? spec.substring(0, at) : spec;
+}
+
 export interface CDKPipelineAppOptions extends awscdk.AwsCdkTypeScriptAppOptions {
   /**
        * If set to true, some default values are modified compared to the settings for AwsCdkTypeScriptApp
@@ -61,9 +76,15 @@ export class CDKPipelineApp extends awscdk.AwsCdkTypeScriptApp {
         mergify: options.closedSource === undefined ? false : !options.closedSource,
       },
       ...options,
+      // Merged, not replaced. Written after the spread this key would otherwise discard
+      // whatever the consumer passed, which is how a repository pinning
+      // '@tepapaatawhai/raindancers-cdk@0.0.175' would silently end up on a different
+      // version instead - the one thing this migration is supposed not to change.
       deps: [
-        '@tepapaatawhai/depcon-cdk',
-        '@tepapaatawhai/raindancers-cdk',
+        ...(options.deps ?? []),
+        ...injectedDeps.filter(
+          (d) => !(options.deps ?? []).map(dependencyName).includes(d),
+        ),
       ],
       workflowBootstrapSteps: codeArtifactAuthSteps,
       depsUpgradeOptions: {
