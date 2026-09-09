@@ -25,29 +25,42 @@ export class Pipeline extends cdk.Stack {
       dockerEnabledForSelfMutation: true,
       dockerEnabledForSynth: true, // we need this to bundle the lambdas with requirements
 
-      // Add permissions for the CodeBuild role to access the secret and KMS key
+      // The synth installs @tepapaatawhai packages from DOC's CodeArtifact repository.
+      // Reading is already open to the whole organisation at the CodeArtifact end via
+      // aws:PrincipalOrgID, so the synth role only needs the IAM half. There is no role
+      // to assume and no token to store: this replaces a cross-account Secrets Manager
+      // read of a GitHub Packages token.
       synthCodeBuildDefaults: {
         rolePolicy: [
-          // Permission to access the secret in the other account
           new cdk.aws_iam.PolicyStatement({
             effect: cdk.aws_iam.Effect.ALLOW,
-            actions: ['secretsmanager:GetSecretValue', 'secretsmanager:DescribeSecret'],
-            resources: ['arn:aws:secretsmanager:ap-southeast-2:957231369717:secret:npm.pkg.github.com_token-CffBec'],
+            actions: ['codeartifact:GetAuthorizationToken'],
+            resources: ['arn:aws:codeartifact:ap-southeast-2:752860630792:domain/doc'],
           }),
-          // Permission to use the KMS key that encrypts the secret
           new cdk.aws_iam.PolicyStatement({
             effect: cdk.aws_iam.Effect.ALLOW,
-            actions: [
-              'kms:Decrypt',
-              'kms:DescribeKey',
-            ],
-            // Ideally, you should specify the exact KMS key ARN if you know it
+            actions: ['sts:GetServiceBearerToken'],
             resources: ['*'],
             conditions: {
               StringEquals: {
-                'aws:ResourceAccount': '957231369717',
+                'sts:AWSServiceName': 'codeartifact.amazonaws.com',
               },
             },
+          }),
+          new cdk.aws_iam.PolicyStatement({
+            effect: cdk.aws_iam.Effect.ALLOW,
+            actions: [
+              'codeartifact:DescribePackageVersion',
+              'codeartifact:DescribeRepository',
+              'codeartifact:GetPackageVersionReadme',
+              'codeartifact:GetRepositoryEndpoint',
+              'codeartifact:ListPackages',
+              'codeartifact:ListPackageVersions',
+              'codeartifact:ListPackageVersionAssets',
+              'codeartifact:ListPackageVersionDependencies',
+              'codeartifact:ReadFromRepository',
+            ],
+            resources: ['arn:aws:codeartifact:ap-southeast-2:752860630792:repository/doc/npm-doc'],
           }),
         ],
       },
@@ -62,8 +75,7 @@ export class Pipeline extends cdk.Stack {
         { connectionArn: props.codestarArn },
        ),
       commands: [
-        'TOKEN=`aws secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:ap-southeast-2:957231369717:secret:npm.pkg.github.com_token-CffBec --region ap-southeast-2 | jq -r ".SecretString"`',
-        'npm set "//npm.pkg.github.com/:_authToken=$TOKEN"',
+        'aws codeartifact login --tool npm --domain doc --domain-owner 752860630792 --repository npm-doc --region ap-southeast-2 --namespace tepapaatawhai',
         'yarn install',
         'yarn build',
         'npx cdk synth',
