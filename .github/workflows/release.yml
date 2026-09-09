@@ -86,6 +86,7 @@ jobs:
     needs: release
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       contents: read
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
@@ -114,9 +115,13 @@ jobs:
         run: cd .repo && npx projen package:js
       - name: Collect js artifact
         run: mv .repo/dist dist
+      - name: Configure AWS Credentials via GitHub OIDC Provider
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::752860630792:role/github-actions-codeartifact-publish
+          aws-region: ap-southeast-2
       - name: Release
         env:
           NPM_DIST_TAG: latest
-          NPM_REGISTRY: registry.npmjs.org
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_REGISTRY: doc-752860630792.d.codeartifact.ap-southeast-2.amazonaws.com/npm/npm-doc/
         run: npx -p publib@latest publib-npm

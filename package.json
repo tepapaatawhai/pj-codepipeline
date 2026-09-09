@@ -1,8 +1,8 @@
 {
-  "name": "pj-codepipeline",
+  "name": "@tepapaatawhai/pj-codepipeline",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tepapaatawhai/ts-cdk-pipeline-apps.git"
+    "url": "https://github.com/tepapaatawhai/pj-codepipeline.git"
   },
   "scripts": {
     "build": "npx projen build",
@@ -72,6 +72,9 @@
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
+  "publishConfig": {
+    "registry": "https://doc-752860630792.d.codeartifact.ap-southeast-2.amazonaws.com/npm/npm-doc/"
+  },
   "version": "0.0.0",
   "jest": {
     "coverageProvider": "v8",
